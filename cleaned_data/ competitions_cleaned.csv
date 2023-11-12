@@ -42,4 +42,4 @@ SFA,sfa-cup,domestic_cup,190,SC1
 UKRP,ukrainian-cup,domestic_cup,177,UKR1
 DFB,dfb-pokal,domestic_cup,40,L1
 FRCH,trophee-des-champions,other,50,FR1
-WLD,fifa-world-cup,international_cup,-1,
+WC,fifa-world-cup,international_cup,-1,
