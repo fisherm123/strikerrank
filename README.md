@@ -3,6 +3,5 @@
 
 
 Sources:
-International Soccer Dataset: https://www.kaggle.com/datasets/martj42/international-football-results-from-1872-to-2017
-Domestic Soccer Dataset: https://www.kaggle.com/datasets/schochastics/domestic-football-results-from-1888-to-2019
-Transfermarkt Dataset: https://www.kaggle.com/datasets/davidcariboo/player-scores?select=competitions.csv
+Transfermarkt Dataset (all competitions 2012-2023 excluding FIFA World Cup): https://www.kaggle.com/datasets/davidcariboo/player-scores?select=competitions.csv
+FIFA World Cup Dataset: https://github.com/jfjelstul/worldcup
