@@ -16,7 +16,7 @@ The web scrapers have been adapted from scrapers used in projects linked HERE an
 
 The database was developed and is hosted on a PostgreSQL server. The database schema documentation as well as SQL code for both tiers of the database is included in the database directory. A README for accessing the database server is included.
 
-All code for the web app is included in the web_app directory. The web app uses the psycopg2 library to access the PostreSQL server, then a flask render template is used to send query results to the web app that uses HTML, CSS, and JavaScript to present a UI for the main analysis of the project as well as tools to gather original insights. The focus is to show a ranking of the top strikers in the top 5 European leagues (described above) based on the key metrics we have chosen to highlight. The UI presents this information as well as filter options to narrow the scope of the data, as well as links to more in-depth information about specific players.
+All code for the web app is included in the web_app directory. The web app uses the psycopg2 library to access the PostreSQL server, then a Flask render template is used to send query results to the web app that uses HTML, CSS, and JavaScript to present a UI for the main analysis of the project as well as tools to gather original insights. The focus is to show a ranking of the top strikers in the top 5 European leagues (described above) based on the key metrics we have chosen to highlight. The UI presents this information as well as filter options to narrow the scope of the data, as well as links to more in-depth information about specific players.
 
 **Technical Challenges:**
 
