@@ -16,6 +16,15 @@ The database was developed and is hosted on a Postgresql server. The database sc
 
 All code for the web app is included in the web_app directory. The web app uses the psycopg2 library to access the Postresql server, then a Flask render template is used to send query results to the web app that uses HTML, CSS, and JavaScript to present a UI for the main analysis of the project as well as tools to gather original insights. The focus is to show a ranking of the top strikers in the top 5 European leagues (described above) based on the key metrics we have chosen to highlight. The UI presents this information as well as filter options to narrow the scope of the data, as well as links to more in-depth information about specific players.
 
+**Key Features:**
+
+One key feature of the project is that as a result of our work fixing and updating the web scraping projects, the project can easily be expanded upon in following years by scraping data from other soccer leagues from around the world by just slightly altering the scraper execution script. The web app's filters are created dynamically upon start, so if you were to scrape data from the United States' Major League Soccer, you could incorporate it into the web app simply by importing the data into the database. No changes to the web app would need to be made to accomodate changes like this, as the filter options are created through a database query
+
+The web app's features include:
+  * a ranked list of players based on the key performance statistic described in our web app
+  * the ability to filter the ranked list by competition
+  * links to player-specific statistics page
+
 **Our Data:**
 
 The data included in this project will be from the 2022-23 seasons of the English Premier League, Spanish La Liga, French Ligue 1, Italian Serie A, and German Bundesliga, FIFA World Cup, and UEFA Champions League. Game statistics are gathered from [fbref.com](https://fbref.com/en/comps/). Player statistics including market value are gathered from https://www.transfermarkt.co.uk/.
