@@ -8,7 +8,7 @@ The goal of this project is to conduct on analysis of player statistics from the
 
 **Project Architecture:**
 
-The project has 3 major working components: the web scrapers (found in scraper directory), the database (found in sql directory), and the web app. 
+The project has 3 major working components: the web scrapers (links to forked projects below), the database (found in sql directory), and the web app. 
 
 The web scrapers have been adapted from a TransferMarkt scraper I forked here: https://github.com/fisherm123/transfermarkt-scraper and a FBRef scraper I forked here: https://github.com/fisherm123/soccerdata/tree/master. They were several years out of date, and had to be fixed to reflect the new layout of the source sites, but largely had a working foundation to crawl the web pages that didn't require alterations. Scripts used to execute the scrapers are included alongside the output files in the scraper directory.
 
