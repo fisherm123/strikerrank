@@ -10,7 +10,7 @@ The data included in this project will be from the 2022-23 seasons of the Englis
 
 **Project Architecture:**
 
-The project has 3 major working components: the web scrapers (found in scraper directory), the database (found in database directory), and the web app (found in web_app directory). 
+The project has 3 major working components: the web scrapers (found in scraper directory), the database (found in sql directory), and the web app. 
 
 The web scrapers have been adapted from scrapers used in projects linked HERE and HERE. They were several years out of date, and had to be fixed to reflect the new layout of the source sites, but largely had a working foundation to crawl the web pages that didn't require alterations. Our adapted versions including information on our changes are included in the scraper directory.
 
