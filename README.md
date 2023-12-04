@@ -2,6 +2,8 @@
 
 **Introduction:**
 
+There are many different existing websites that provide soccer statistics. However, the most extensive, reliable, and popular sources tend to specialize in certain areas. FBRef provides an enourmous volume of raw data, but can be too difficult to sort through and doesn't update player market values frequently. TransferMarkt specializes in primarily reporting accurate and up-to-date player market values, but doesn't have much else information. As such, we want to create a platform that combines the best of both worlds, giving the user a platform to compare game statistics with the current estimated value of a player.
+
 The goal of this project is to conduct on analysis of player statistics from the 2022-23 soccer season from the top 5 leagues in Europe (as well as major international competitions those players were part of) contrasted with current estimated market values of those players. We will accomplish this by gathering data from the 2022-23 season from relevant leagues, put together a database of key information from this data, and develop a user interface through a web app that will allow users to see the results of our analysis as well as develop their own insights.
 
 **Project Architecture:**
