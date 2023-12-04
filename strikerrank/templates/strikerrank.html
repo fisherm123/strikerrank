@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>  
+    <head>
+        <title>StrikerRank</title>
+        <h1>StrikerRank</h1>   
+        <style>
+            .center {
+                margin-left: auto;
+                margin-right: auto;
+            }
+            head {
+                font-size: 128px;
+            }
+            body {
+                 background-color: lightblue;
+            }
+            
+            h1 {
+                color: white;
+                text-align: center;
+            }
+            
+            p {
+                font-family: verdana;
+                font-size: 20px;
+            }
+            tbody tr:nth-child(even) {
+                background-color: #D6EEEE;
+            }
+        </style>
+    </head>
+    <body>
+        <select multiple>
+            {% for option in league_options %}
+                <option >{{ option[0] }}</option>
+            {% endfor %}
+        </select>
+        <table class="center">
+            <thead>
+            <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th>xG</th>
+                <th>rG</th>
+                <th>Value</th>
+            </tr>
+            </thead>    
+            <tbody>
+            {% for row in data %}    
+                    <tr>
+                        <td><img src ="{{row[0]}}"></td>
+                        <td>{{row[1]}}</td>
+                        <td>{{row[2]}}</td>
+                        <td>{{row[3]}}</td>
+                        <td>{{row[4]}}</td>
+                        <td>{{row[5]}}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </body>
+</html>
