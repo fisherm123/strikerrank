@@ -1,4 +1,4 @@
-# soccerdatabase
+# StrikerRank
 
 **Introduction:**
 
