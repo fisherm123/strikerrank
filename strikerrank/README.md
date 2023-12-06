@@ -1,6 +1,7 @@
 # Web App
 
 **Our Analysis**
+
 For every shot a player takes, experts are able to determine a statistic known as "Expected Goal (xG)" for the shot. 
 For a shot with xG of 0.5, this means that on average, this shot becomes a goal 50% of the time. One key metric for
 determining the ability of a striker is to compare the amount of xG they accumulated during a game with their rG 
