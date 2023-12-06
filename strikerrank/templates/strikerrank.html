@@ -30,11 +30,14 @@
         </style>
     </head>
     <body>
-        <select multiple>
+        <label>League:</label>
+        <select onchange="update(this.value)">
+                <option value="all">All</option>
             {% for option in league_options %}
-                <option >{{ option[0] }}</option>
-            {% endfor %}
+                <option value="{{ option[0] }}" {% if selected == option[0]%} selected {%endif%}>{{ option[0] }}</option>
+            {% endfor %}  
         </select>
+        <button onclick="more()">More Results</button>
         <table class="center">
             <thead>
             <tr>
@@ -47,6 +50,7 @@
             </tr>
             </thead>    
             <tbody>
+            <!-- For player data, add a button for each player that sends post request to render player data -->
             {% for row in data %}    
                     <tr>
                         <td><img src ="{{row[0]}}"></td>
@@ -59,5 +63,31 @@
                 {% endfor %}
             </tbody>
         </table>
+        <script>
+            function update(selected){
+                if (selected == 'all'){
+                    window.location.href = '/strikerrank';
+                }
+                else{
+                    fetch('/update/' + selected, {
+                    method: 'POST',
+                    body: JSON.stringify({league: selected}),
+                    });
+                    window.location.href = '/update/' + selected;
+                }
+            };
+            function more(selected){
+                var p = new URLSearchParams(window.location.search);
+                var num = parseInt(p.get('n')) + 10;
+                if (isNaN(num)){
+                    window.location.href = window.location.href + '?n=20';
+                }
+                else{
+                    
+                    p.set('n', String(num));
+                    window.location.search = p;
+                } 
+            }
+        </script>
     </body>
 </html>
