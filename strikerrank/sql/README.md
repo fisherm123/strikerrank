@@ -2,7 +2,7 @@
 
 **Postgresql Server:**
 
-Our database was managed through a Postgresql server which our web app connects to using the psycopg2 Python library. A dump of the database is included in the srdb.sql file.
+Our database was managed and created through the pgAdmin tool and hosted on a postgres server which our web app connects to using the psycopg2 Python library. A dump of the database created in pgAdmin is included in the srdb.sql file.
 
 **Database Layout:**
 
