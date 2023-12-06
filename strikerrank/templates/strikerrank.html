@@ -30,11 +30,15 @@
         </style>
     </head>
     <body>
-        <select multiple>
+        <!-- created form to pass chosen league to the backend to filter results by league-->
+        <select multiple form="leagues">
             {% for option in league_options %}
-                <option >{{ option[0] }}</option>
+                <option value="{{ option[0] }}">{{ option[0] }}</option>
             {% endfor %}
         </select>
+        <form action="/strikerrank" method="put" id="leagues">
+            <input name="league" type="submit">
+        </form>
         <table class="center">
             <thead>
             <tr>
@@ -47,6 +51,7 @@
             </tr>
             </thead>    
             <tbody>
+            <!-- For player data, add a button for each player that sends post request to render player data -->
             {% for row in data %}    
                     <tr>
                         <td><img src ="{{row[0]}}"></td>
@@ -55,6 +60,9 @@
                         <td>{{row[3]}}</td>
                         <td>{{row[4]}}</td>
                         <td>{{row[5]}}</td>
+                        <form action="/strikerrank" method="post">
+                            <input name="player" type="More">
+                        </form>
                     </tr>
                 {% endfor %}
             </tbody>
