@@ -30,15 +30,14 @@
         </style>
     </head>
     <body>
-        <!-- created form to pass chosen league to the backend to filter results by league-->
-        <select multiple form="leagues">
+        <label>League:</label>
+        <select onchange="update(this.value)">
+                <option value="all">All</option>
             {% for option in league_options %}
-                <option value="{{ option[0] }}">{{ option[0] }}</option>
-            {% endfor %}
+                <option value="{{ option[0] }}" {% if selected == option[0]%} selected {%endif%}>{{ option[0] }}</option>
+            {% endfor %}  
         </select>
-        <form action="/strikerrank" method="put" id="leagues">
-            <input name="league" type="submit">
-        </form>
+        <button onclick="more()">More Results</button>
         <table class="center">
             <thead>
             <tr>
@@ -60,12 +59,35 @@
                         <td>{{row[3]}}</td>
                         <td>{{row[4]}}</td>
                         <td>{{row[5]}}</td>
-                        <form action="/strikerrank" method="post">
-                            <input name="player" type="More">
-                        </form>
                     </tr>
                 {% endfor %}
             </tbody>
         </table>
+        <script>
+            function update(selected){
+                if (selected == 'all'){
+                    window.location.href = '/strikerrank';
+                }
+                else{
+                    fetch('/update/' + selected, {
+                    method: 'POST',
+                    body: JSON.stringify({league: selected}),
+                    });
+                    window.location.href = '/update/' + selected;
+                }
+            };
+            function more(selected){
+                var p = new URLSearchParams(window.location.search);
+                var num = parseInt(p.get('n')) + 10;
+                if (isNaN(num)){
+                    window.location.href = window.location.href + '?n=20';
+                }
+                else{
+                    
+                    p.set('n', String(num));
+                    window.location.search = p;
+                } 
+            }
+        </script>
     </body>
 </html>
