@@ -12,6 +12,6 @@ Our database consists of two tiers of tables. The lower tier, denoted by tables 
 
 **Schema:**
 
-
+https://github.com/fisherm123/strikerrank/blob/main/strikerrank/sql/schema.png
 
 
