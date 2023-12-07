@@ -3,7 +3,7 @@
 **Notes**
 
 * The repository contains additional README files in subdirectories to give an explanation of the work done for each of the rubric items.
-* A video of the demo is included for ease of grading, since we didn't spend time setting up the postgreSQL server so that it could be remotely accessed at any time.
+* A video of the demo (https://drive.google.com/file/d/1Oo0oaU47IUj4hsX-8R4PvOwUtxQFrJV-/view?usp=sharing) is included for ease of grading, since we didn't spend time setting up the postgreSQL server so that it could be remotely accessed at any time.
   
 **Introduction and Goals:**
 
