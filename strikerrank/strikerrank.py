@@ -10,7 +10,7 @@ con = psycopg2.connect(database="worldsoccer", host="localhost", user="postgres"
 
 cursor = con.cursor()
 
-@app.route('/strikerrank', methods=["GET", "POST"])
+@app.route('/strikerrank', methods=["GET"])
 def striker():
 
     n = request.args.get('n')
@@ -39,14 +39,14 @@ def striker():
     cursor.execute(initial_table)
     table = cursor.fetchmany(n)
 
-    leagues_q = "select league from leagues where international = 'domestic' order by international asc"
+    leagues_q = "select name from leagues where type = 0"
     
     cursor.execute(leagues_q)
     leagues = cursor.fetchall()
 
     return render_template('strikerrank.html', data=table, league_options=leagues, selected = 'all')
 
-@app.route('/update/<sel_league>', methods=["POST", "GET"])
+@app.route('/update/<sel_league>', methods=["GET", "POST"])
 def update(sel_league):
 
     n = request.args.get('n')
@@ -54,6 +54,8 @@ def update(sel_league):
         n = 10
     else:
         n = int(n)
+
+    d = {"Bundesliga":0, "La Liga":2, "Ligue 1":3, "Premier League": 4, "Serie A": 5}
         
     initial_table = sql.SQL(
             """with included_appearances as (
@@ -77,10 +79,10 @@ def update(sel_league):
             where dob > '11-24-1993'
             group by shot_summary.id, img, first, last, rg, val, shot_summary.id
             having sum(minutes) > 1000
-            order by (rg - max(sum_xg)) desc""").format(sql.Literal(sel_league))
+            order by (rg - max(sum_xg)) desc""").format(sql.Literal(d[sel_league]))
 
-    leagues_q = "select league from leagues where international = 'domestic' order by international asc"
-   
+    leagues_q = "select name from leagues where type = 0"
+    
     cursor.execute(leagues_q)
     leagues = cursor.fetchall()
 
@@ -89,7 +91,7 @@ def update(sel_league):
 
     return render_template('strikerrank.html', data=table, league_options = leagues, selected = sel_league)
 
-@app.route('/player/<id>', methods=["POST","GET"])
+@app.route('/player/<id>', methods=["GET"])
 def player(id):
 
     player_q = """select * from players where id = {}""".format(id)
