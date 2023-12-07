@@ -2,9 +2,14 @@
 <html>  
     <head>
         <title>StrikerRank</title>
-        <h1>StrikerRank</h1>   
+        <h1>{{ player_info[1] }} {{ player_info[2] }}</h1>   
         <style>
             .center {
+                margin-left: auto;
+                margin-right: auto;
+                display: block;
+            }
+            .center-table {
                 margin-left: auto;
                 margin-right: auto;
             }
@@ -12,82 +17,79 @@
                 font-size: 128px;
             }
             body {
-                 background-color: lightblue;
+                 background-color: rgb(175, 221, 237);
             }
             
             h1 {
-                color: white;
+                color: rgb(15, 4, 4);
+                text-align: center;
+            }
+            h2 {
+                color: rgb(15, 4, 4);
                 text-align: center;
             }
             
+            
             p {
+                text-align: center;
                 font-family: verdana;
                 font-size: 20px;
             }
             tbody tr:nth-child(even) {
                 background-color: #D6EEEE;
             }
+        
         </style>
     </head>
     <body>
-        <label>League:</label>
-        <select onchange="update(this.value)">
-                <option value="all">All</option>
-            {% for option in league_options %}
-                <option value="{{ option[0] }}" {% if selected == option[0]%} selected {%endif%}>{{ option[0] }}</option>
-            {% endfor %}  
-        </select>
-        <button onclick="more()">More Results</button>
-        <table class="center">
+        <img class="center" src="{{ player_info[7] }}">
+        <p text-align: center>Birthdate: {{ player_info[3] }} </p>
+        <p>Height: {{ player_info[4] }}</p>
+        <p>Citizenship: {{ player_info[5] }}</p>
+        <p>Position: {{ player_info[6] }}</p>
+        <p>National Team: {{ player_info[8] }}</p>
+        <p>Primary Foot: {{ player_info[9] }}</p>
+        <p>Market Value: {{ player_info[10] }}</p> 
+        <h2>Appearances:</h2>  
+        <table class="center-table">
             <thead>
             <tr>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th>xG</th>
-                <th>rG</th>
-                <th>Value</th>
+                <th>Home</th>
+                <th>Away</th>
+                <th>Played For</th>
+                <th>Date</th>
+                <th>Minutes</th>
+                <th>GI</th>
+                <th>Ast</th>
+                <th>PK</th>
+                <th>PK Attempts</th>
+                <th>Yellow</th>
+                <th>Red</th>
+                <th>xg</th>
+                <th>npxG</th>
+                <th>xAG</th>
             </tr>
             </thead>    
             <tbody>
-            <!-- For player data, add a button for each player that sends post request to render player data -->
-            {% for row in data %}    
+            {% for row in table %}    
                     <tr>
-                        <td><img src ="{{row[0]}}"></td>
-                        <td>{{row[1]}}</td>
-                        <td>{{row[2]}}</td>
-                        <td>{{row[3]}}</td>
-                        <td>{{row[4]}}</td>
-                        <td>{{row[5]}}</td>
+                        <td>{{ row[0] }}</td>
+                        <td>{{ row[1] }}</td>
+                        <td>{{ row[2] }}</td>
+                        <td>{{ row[3] }}</td>
+                        <td>{{ row[4] }}</td>
+                        <td>{{ row[5] }}</td>
+                        <td>{{ row[6] }}</td>
+                        <td>{{ row[7] }}</td>
+                        <td>{{ row[8] }}</td>
+                        <td>{{ row[9] }}</td>
+                        <td>{{ row[10] }}</td>
+                        <td>{{ row[11] }}</td>
+                        <td>{{ row[12] }}</td>
+                        <td>{{ row[13] }}</td>
                     </tr>
                 {% endfor %}
             </tbody>
-        </table>
-        <script>
-            function update(selected){
-                if (selected == 'all'){
-                    window.location.href = '/strikerrank';
-                }
-                else{
-                    fetch('/update/' + selected, {
-                    method: 'POST',
-                    body: JSON.stringify({league: selected}),
-                    });
-                    window.location.href = '/update/' + selected;
-                }
-            };
-            function more(selected){
-                var p = new URLSearchParams(window.location.search);
-                var num = parseInt(p.get('n')) + 10;
-                if (isNaN(num)){
-                    window.location.href = window.location.href + '?n=20';
-                }
-                else{
-                    
-                    p.set('n', String(num));
-                    window.location.search = p;
-                } 
-            }
-        </script>
+        </table>     
     </body>
 </html>
