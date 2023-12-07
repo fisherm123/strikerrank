@@ -2,7 +2,7 @@
 
 **Note**
 
-Each directory has its own README for more specific information about each part of the project.
+The repository contains additional README files in subdirectories to give an explanation of the work done for each of the rubric items.
 
 **Introduction and Goals:**
 
