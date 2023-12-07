@@ -1,9 +1,10 @@
 # StrikerRank
 
-**Note**
+**Notes**
 
-The repository contains additional README files in subdirectories to give an explanation of the work done for each of the rubric items.
-
+* The repository contains additional README files in subdirectories to give an explanation of the work done for each of the rubric items.
+* A video of the demo is included for ease of grading, since we didn't spend time setting up the postgreSQL server so that it could be remotely accessed at any time.
+  
 **Introduction and Goals:**
 
 There are many different existing websites that provide soccer statistics. However, the most extensive, reliable, and popular sources tend to specialize in certain areas. FBRef provides an enourmous volume of raw data, but can be too difficult to sort through and doesn't update player market values frequently. TransferMarkt specializes in primarily reporting accurate and up-to-date player market values, but doesn't have much else information. As such, we want to create a platform that combines the best of both worlds, giving the user a platform to compare game statistics with the current estimated value of a player.
