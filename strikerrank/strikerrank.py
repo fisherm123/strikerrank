@@ -5,12 +5,12 @@ from flask import Flask, render_template, request
 app = Flask(__name__)
 
 
-con = psycopg2.connect(database="worldsoccer", host="0.0.0.0", user="postgres", 
+con = psycopg2.connect(database="worldsoccer", host="localhost", user="postgres", 
                        password="musowls14", port="5432")
 
 cursor = con.cursor()
 
-@app.route('/strikerrank', methods=["GET", "POST", "PUT"])
+@app.route('/strikerrank', methods=["GET", "POST"])
 def striker():
 
     n = request.args.get('n')
@@ -28,11 +28,11 @@ def striker():
     having sum(shots.xg) > 0
     order by sum(shots.xg) desc)
 
-    select img, first, last, max(sum_xg) as my_xg, rg, val
+    select img, first, last, max(sum_xg) as my_xg, rg, val, id
     from shot_summary
     left join appearances on id = player_id
     where dob > '11-24-1993'
-    group by img, first, last, rg, val
+    group by img, first, last, rg, val, id
     having sum(minutes) > 1000
     order by (rg - max(sum_xg)) desc"""
 
@@ -40,13 +40,14 @@ def striker():
     table = cursor.fetchmany(n)
 
     leagues_q = "select league from leagues where international = 'domestic' order by international asc"
+    
     cursor.execute(leagues_q)
     leagues = cursor.fetchall()
 
-    return render_template('strikerrank.html', data=table, league_options=leagues, selected = 'all', num = n)
+    return render_template('strikerrank.html', data=table, league_options=leagues, selected = 'all')
 
-@app.route('/update/<league>', methods=["POST", "GET"])
-def update(league):
+@app.route('/update/<sel_league>', methods=["POST", "GET"])
+def update(sel_league):
 
     n = request.args.get('n')
     if n == None:
@@ -70,18 +71,41 @@ def update(league):
             having sum(shots.xg) > 0
             order by sum(shots.xg) desc)
 
-            select img, first, last, max(sum_xg) as my_xg, rg, val
+            select img, first, last, max(sum_xg) as my_xg, rg, val, shot_summary.id
             from shot_summary
             right join included_appearances on shot_summary.id = player_id
             where dob > '11-24-1993'
-            group by shot_summary.id, img, first, last, rg, val
+            group by shot_summary.id, img, first, last, rg, val, shot_summary.id
             having sum(minutes) > 1000
-            order by (rg - max(sum_xg)) desc""").format(sql.Literal(league))
+            order by (rg - max(sum_xg)) desc""").format(sql.Literal(sel_league))
 
     leagues_q = "select league from leagues where international = 'domestic' order by international asc"
+   
     cursor.execute(leagues_q)
     leagues = cursor.fetchall()
 
     cursor.execute(initial_table)
     table = cursor.fetchmany(n)
-    return render_template('strikerrank.html', data=table, league_options = leagues, selected = league, num = n)
+
+    return render_template('strikerrank.html', data=table, league_options = leagues, selected = sel_league)
+
+@app.route('/player/<id>', methods=["POST","GET"])
+def player(id):
+
+    player_q = """select * from players where id = {}""".format(id)
+
+    appearances_q = """select home.name, away.name, played_for.name, matches.date, minutes, gi, ast, pk, pk_att, yellow, red, xg, npxg, xag
+    from appearances 
+    left join teams as played_for on played_for.id = team_id
+    left join matches on match_id = matches.id
+    left join teams as home on matches.home_id = home.id
+    left join teams as away on matches.away_id = away.id
+    where player_id = {}
+    order by matches.date asc""".format(id)
+
+    cursor.execute(appearances_q)
+    table = cursor.fetchall()
+
+    cursor.execute(player_q)
+    player_info = cursor.fetchone()
+    return render_template('player.html', player_info = player_info, table = table)
