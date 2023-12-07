@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>  
+    <head>
+        <title>StrikerRank</title>
+        <h1>StrikerRank</h1>   
+        <style>
+            .center {
+                margin-left: auto;
+                margin-right: auto;
+            }
+            head {
+                font-size: 128px;
+            }
+            body {
+                 background-color: rgb(175, 221, 237);
+            }
+            
+            h1 {
+                color: rgb(6, 1, 1);
+                text-align: center;
+            }
+            
+            p {
+                font-family: verdana;
+                font-size: 20px;
+            }
+            tbody tr:nth-child(even) {
+                background-color: #D6EEEE;
+            }
+        </style>
+    </head>
+    <body>
+        <label>League:</label>
+        <select onchange="update(this.value)">
+                <option value="all">All</option>
+            {% for option in league_options %}
+                <option value="{{ option[0] }}" {% if selected == option[0]%} selected {%endif%}>{{ option[0] }}</option>
+            {% endfor %}  
+        </select>
+        <button onclick="more()">More Results</button>
+        <table class="center">
+            <thead>
+            <tr>
+                <th></th>
+                <th></th>
+                <th>xG</th>
+                <th>rG</th>
+                <th>Value</th>
+            </tr>
+            </thead>    
+            <tbody>
+            {% for row in data %}    
+                    <tr>
+                        <td><img src ="{{ row[0] }}"></td>
+                        <td><a href="../player/{{ row[6] }}">{{ row[1] }} {{ row[2] }}</a></td>
+                        <td>{{ row[3] }}</td>
+                        <td>{{ row[4] }}</td>
+                        <td>{{ row[5] }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <script>
+            function update(selected){
+                if (selected == 'all'){
+                    window.location.href = '/strikerrank';
+                }
+                else{
+                    fetch('/update/' + selected, {
+                    method: 'POST',
+                    body: JSON.stringify({sel_league: selected}),
+                    });
+                    window.location.href = '/update/' + selected;
+                }
+            };
+            function more(selected){
+                var p = new URLSearchParams(window.location.search);
+                var num = parseInt(p.get('n')) + 10;
+                if (isNaN(num)){
+                    window.location.href = window.location.href + '?n=20';
+                }
+                else{
+                    
+                    p.set('n', String(num));
+                    window.location.search = p;
+                } 
+            }
+        </script>
+    </body>
+</html>
